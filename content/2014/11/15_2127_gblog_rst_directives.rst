@@ -58,6 +58,17 @@ Image
     :align: center
 
 
+BlockQuote
+----------
+
+.. code-block:: rst
+
+    .. blockquote::
+        :content: When science and magic meet,<br>history is born.
+        :author: A Certain Magical Index
+        :author_url: https://en.wikipedia.org/wiki/A_Certain_Magical_Index
+
+
 Meta information
 ----------------
 
