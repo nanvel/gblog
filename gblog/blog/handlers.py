@@ -1,4 +1,5 @@
 import arrow
+import datetime
 import json
 import sys
 import subprocess
@@ -18,13 +19,13 @@ class FeedHandler(RequestHandler):
 class PostHandler(RequestHandler):
 
     def get(self):
-        limit = self.get_argument('limit', 2)
+        limit = self.get_argument('limit', 5)
         limit = int(limit)
         a = self.get_argument('a', None)
         b = self.get_argument('b', None)
         if limit > options.page_limit_max or limit < 1:
             limit = options.page_limit_max
-        timestamp = arrow.utcnow().timestamp
+        timestamp = (arrow.utcnow() + datetime.timedelta(days=1)).timestamp
         if not a and not b:
             b = timestamp
         a = int(a) if a else None
@@ -52,5 +53,5 @@ class CommitHandler(RequestHandler):
             self.write('Success')
             return
         self.application.redis.setex(self.REDIS_UPDATE_TIMEOUT_KEY, 30, 1)
-        proc = subprocess.Popen([sys.executable, rel('update.py')])
+        proc = subprocess.Popen([sys.executable, rel('pullchanges.sh')])
         proc.communicate()

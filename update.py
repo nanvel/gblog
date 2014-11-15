@@ -46,7 +46,8 @@ if __name__ == '__main__':
                     settings=None, settings_spec=None,
                     settings_overrides={
                         'template': rel('templates/html_writer.txt'),
-                        'initial-header-level': 2},
+                        'initial_header_level': 2,
+                        'doctitle_xform': False},
                     config_section=None, enable_exit_status=False)
                 content = output.strip()
                 content = post_template.generate(
