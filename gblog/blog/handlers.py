@@ -1,8 +1,12 @@
 import arrow
 import json
+import sys
+import subprocess
 
 from tornado.options import options
 from tornado.web import RequestHandler
+
+from ..common.utils import rel
 
 
 class FeedHandler(RequestHandler):
@@ -37,3 +41,16 @@ class PostHandler(RequestHandler):
                 withscores=True, score_cast_func=int)
         for p in posts:
             self.write(p[0])
+
+
+class CommitHandler(RequestHandler):
+
+    REDIS_UPDATE_TIMEOUT_KEY = 'gblog:update'
+
+    def post(self):
+        if self.application.redis.exists(self.REDIS_UPDATE_TIMEOUT_KEY):
+            self.write('Success')
+            return
+        self.application.redis.setex(self.REDIS_UPDATE_TIMEOUT_KEY, 30, 1)
+        proc = subprocess.Popen([sys.executable, rel('update.py')])
+        proc.communicate()

@@ -2,7 +2,7 @@ import redis
 
 from tornado import web, options, ioloop
 
-from gblog.blog.handlers import FeedHandler, PostHandler
+from gblog.blog.handlers import FeedHandler, PostHandler, CommitHandler
 from gblog.common.utils import rel
 
 
@@ -12,6 +12,7 @@ class GBlogApplication(web.Application):
         kwargs['handlers'] = [
             web.url(r'/', FeedHandler, name='feed'),
             web.url(r'/post', PostHandler, name='post'),
+            web.url(r'/commit', CommitHandler, name='commin'),
         ]
         kwargs['debug'] = True
         kwargs['static_path'] = rel('static')
