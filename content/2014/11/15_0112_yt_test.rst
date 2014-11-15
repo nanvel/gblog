@@ -5,3 +5,6 @@ Hi!
     :height: 315
     :width: 560
     :align: left
+
+.. info::
+    :tags: Anime, Nightcore

@@ -1,0 +1,154 @@
+@charset "UTF-8";
+
+@font-face {
+  font-family: "persona-icon";
+  src:url("../fonts/persona-icon.eot");
+  src:url("../fonts/persona-icon.eot?#iefix") format("embedded-opentype"),
+    url("../fonts/persona-icon.woff") format("woff"),
+    url("../fonts/persona-icon.ttf") format("truetype"),
+    url("../fonts/persona-icon.svg#persona-icon") format("svg");
+  font-weight: normal;
+  font-style: normal;
+
+}
+
+[data-icon]:before {
+  font-family: "persona-icon" !important;
+  content: attr(data-icon);
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+[class^="icon-"]:before,
+[class*=" icon-"]:before {
+  font-family: "persona-icon" !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-fontawesome-webfont-1:before {
+  content: "b";
+}
+.icon-fontawesome-webfont-2:before {
+  content: "c";
+}
+.icon-fontawesome-webfont:before {
+  content: "a";
+}
+.icon-menu:before {
+  content: "a";
+}
+.icon-rss:before {
+  content: "b";
+}
+.icon-twitter:before {
+  content: "c";
+}
+.icon-vimeo:before {
+  content: "d";
+}
+.icon-tumblr:before {
+  content: "e";
+}
+.icon-vkontakte:before {
+  content: "f";
+}
+.icon-soundcloud:before {
+  content: "g";
+}
+.icon-skype:before {
+  content: "h";
+}
+.icon-rdio:before {
+  content: "i";
+}
+.icon-pinterest:before {
+  content: "j";
+}
+.icon-mixi:before {
+  content: "k";
+}
+.icon-heart:before {
+  content: "l";
+}
+.icon-github:before {
+  content: "m";
+}
+.icon-gplus:before {
+  content: "n";
+}
+.icon-instagrem:before {
+  content: "o";
+}
+.icon-lastfm:before {
+  content: "p";
+}
+.icon-flickr:before {
+  content: "q";
+}
+.icon-linkedin:before {
+  content: "r";
+}
+.icon-paypal:before {
+  content: "s";
+}
+.icon-picasa:before {
+  content: "t";
+}
+.icon-stumbleupon:before {
+  content: "u";
+}
+.icon-dribbble:before {
+  content: "v";
+}
+.icon-behance:before {
+  content: "w";
+}
+.icon-dropbox:before {
+  content: "x";
+}
+.icon-droplet:before {
+  content: "y";
+}
+.icon-evernote:before {
+  content: "z";
+}
+.icon-facebook-squared:before {
+  content: "A";
+}
+.icon-spotify:before {
+  content: "B";
+}
+.icon-retweet:before {
+  content: "C";
+}
+.icon-export:before {
+  content: "D";
+}
+.icon-mail:before {
+  content: "G";
+}
+.icon-fontawesome-webfont:before {
+  content: "a";
+}
+.icon-fontawesome-webfont:before {
+  content: "a";
+}
+.icon-fontawesome-webfont-1:before {
+  content: "E";
+}
+.icon-fontawesome-webfont-2:before {
+  content: "F";
+}

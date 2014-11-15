@@ -1,3 +1,5 @@
 .env
 bin
 *.pyc
+.DS_Store
+Thumbs.db

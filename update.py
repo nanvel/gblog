@@ -1,3 +1,4 @@
+import arrow
 import redis
 import os
 
@@ -5,7 +6,7 @@ from docutils import io
 from docutils.core import publish_programmatically
 from gblog.common.utils import rel, path_to_timestamp
 from gblog.common.directives import register_rst_directives
-from tornado import options
+from tornado import options, template
 
 
 REDIS_FEED_TEMP_KEY = 'gblog:feed:temp'
@@ -19,11 +20,19 @@ if __name__ == '__main__':
         port=options.options.redis_port,
         db=options.options.redis_db)
     r.delete(REDIS_FEED_TEMP_KEY)
+    loader = template.Loader(rel('templates'))
+    post_template = loader.load('post.html')
+    years = {}
     for root, dirs, files in os.walk(options.options.content_path):
         for f in files:
             if f.endswith('.rst'):
                 path = os.path.join(root, f)
-                created = path_to_timestamp(path)
+                created, year, month = path_to_timestamp(path)
+                if year in years:
+                    if month not in years[year]:
+                        years[year].append(month)
+                else:
+                    years[year] = [month]
                 if not created:
                     continue
                 modified = int(os.path.getmtime(path))
@@ -36,9 +45,28 @@ if __name__ == '__main__':
                     writer=None, writer_name='html',
                     settings=None, settings_spec=None,
                     settings_overrides={
-                        'template': rel('templates/html_writer.txt')},
+                        'template': rel('templates/html_writer.txt'),
+                        'initial-header-level': 2},
                     config_section=None, enable_exit_status=False)
                 content = output.strip()
+                content = post_template.generate(
+                    post_content=content,
+                    date=arrow.get(created).strftime('%B %d, %Y'),
+                    date_link='#a={timestamp}'.format(timestamp=created - (created % 86400)),
+                    share_link='#b={timestamp}&limit=1'.format(timestamp=created),
+                    github_link='https://github.com/nanvel/gblog/tree/master/content/{path}'.format(
+                        path='/'.join(path.split('/')[-3:])),
+                    timestamp=created)
                 r.zadd(REDIS_FEED_TEMP_KEY, created, content)
     r.zunionstore(dest=options.options.redis_feed_key, keys=[REDIS_FEED_TEMP_KEY])
     r.delete(REDIS_FEED_TEMP_KEY)
+    # prepare index page
+    page_template = loader.load('index.html')
+    years_list = []
+    for y in sorted(years.keys()):
+        mons = []
+        for m in sorted(years[y]):
+            mons.append((m, arrow.get(int(y), int(m), 1).timestamp))
+        years_list.append((y, mons))
+    content = page_template.generate(years=years_list)
+    r.set(options.options.redis_page_key, content)

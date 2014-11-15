@@ -11,12 +11,10 @@ rel = lambda p: os.path.join(
 def path_to_timestamp(path):
     try:
         year, month, day = path.split('/')[-3:]
-        year = int(year)
-        month = int(month)
         day, t = day.split('_')[:2]
         day = int(day)
         hour = int(t[:2])
         minute = int(t[2:])
-        return arrow.get(year, month, day, hour, minute).timestamp
+        return arrow.get(int(year), int(month), day, hour, minute).timestamp, year, month
     except (ValueError, TypeError):
         return None

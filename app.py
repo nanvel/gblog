@@ -14,6 +14,8 @@ class GBlogApplication(web.Application):
             web.url(r'/post', PostHandler, name='post'),
         ]
         kwargs['debug'] = True
+        kwargs['static_path'] = rel('static')
+        kwargs['template_path'] = rel('templates')
         self.redis = redis.StrictRedis(
             host=options.options.redis_host,
             port=options.options.redis_port,
