@@ -1,7 +1,6 @@
 GBlog custom rst directives
 ===========================
 
-
 Code
 ----
 
@@ -76,6 +75,10 @@ Meta information
 
     .. info::
         :tags: Tag1, Tag2
+
+
+Links:
+    - `GBlog on GitHub <https://github.com/nanvel/gblog>`__
 
 
 .. info::

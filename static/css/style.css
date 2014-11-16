@@ -258,7 +258,7 @@ a:focus, a:active{
 .home_page_post_area .home_single_post .post_content_area .single_post_content h2>a:hover{
 	color: #39c492;
 }
-.home_page_post_area .home_single_post .post_content_area .single_post_content h3{
+.home_page_post_area .home_single_post .post_content_area .single_post_content h3, .home_page_post_area .home_single_post .post_content_area .single_post_content dt{
 	color: #777777;
 	font-family: 'Noto Serif',serif;
 	font-size: 19px;
