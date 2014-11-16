@@ -1,0 +1,8 @@
+- GA tracking code
+- directive for google maps
+- directive for soudcloud
+- sitemap
+- search with elasticsearch
+- tags cloud
+- gist directive
+- favicon
