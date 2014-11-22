@@ -9,6 +9,6 @@ Features:
     - minimal requirements
     - easy to deploy
     - `RST <http://docutils.sourceforge.net/rst.html>`__ syntax
-    - `custom RST directives <http://nanvel.com/#b=1416086820&limit=1>`__
+    - `custom RST directives <http://nanvel.com/#b=1416086820&l=1>`__
 
 Blog theme used: `PERSONA | Minimal HTML Personal Blog Template <http://themeforest.net/item/persona-minimal-html-personal-blog-template/8391369>`__ . You should buy it if You going to use this code, or replace templates and static files with your own.
