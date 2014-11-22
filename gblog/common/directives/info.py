@@ -14,11 +14,6 @@ from docutils import nodes
 from docutils.parsers.rst import Directive, directives
 
 
-def coordinate(argument):
-    coordinate = float(argument)
-    return u'{coordinate:.3f}'.format(coordinate=coordinate)
-
-
 class Info(Directive):
     has_content = False
     required_arguments = 0
