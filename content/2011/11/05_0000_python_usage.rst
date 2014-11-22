@@ -1,7 +1,7 @@
 Популярність Python
 ===================
 
-.. image:: http://raw.githubusercontent.com/nanvel/gblog/master/content/2014/11/python_usage.png
+.. image:: https://raw.githubusercontent.com/nanvel/gblog/master/content/2011/11/python_usage.png
     :width: 400px
     :alt: Python usage
     :align: left
