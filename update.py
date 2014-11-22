@@ -54,7 +54,7 @@ if __name__ == '__main__':
                     post_content=content,
                     date=arrow.get(created).strftime('%B %d, %Y'),
                     date_link='#a={timestamp}'.format(timestamp=created - (created % 86400)),
-                    share_link='#b={timestamp}&limit=1'.format(timestamp=created),
+                    share_link='#b={timestamp}&l=1'.format(timestamp=created),
                     github_link='https://github.com/nanvel/gblog/tree/master/content/{path}'.format(
                         path='/'.join(path.split('/')[-3:])),
                     timestamp=created)

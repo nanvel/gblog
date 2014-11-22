@@ -243,6 +243,10 @@ a:focus, a:active{
 	font-weight:900;
 }
 
+.home_page_post_area .home_single_post .post_content_area .single_post_content img{
+	margin: 20px 0;
+}
+
 .home_page_post_area .home_single_post .post_content_area .single_post_content h2>a{
 	color: #262626;
 	font-family: lato;

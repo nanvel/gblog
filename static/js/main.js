@@ -21,18 +21,18 @@
 		}
 	}
 
-	function loadPage(a, b, limit){
+	function loadPage(a, b, l){
 		"use strict";
 		$.ajax({
 		    url: '/post',
 		    dataType: 'html',
-		 	data: {a: a, b: b, limit: limit},
+		 	data: {a: a, b: b, l: l},
 		 	type: 'GET',
 		    success: function (data) {
 		    	$('.js-post').remove();
 		        $('.js-posts').prepend(data)
 		        if (a || b){
-		        	var stateObj = {a: a, b: b, limit: limit};
+		        	var stateObj = {a: a, b: b, l: l};
 		        	var h = [];
 		        	if(a){
 		        		h.push('a=' + a)
@@ -40,8 +40,8 @@
 		        	if(b){
 		        		h.push('b=' + b)
 		        	}
-		        	if(limit) {
-		        		h.push('limit=' + limit);
+		        	if(l) {
+		        		h.push('l=' + l);
 		        	}
 					history.pushState(stateObj, 'Posts starting from ' + a || b, '#' + h.join('&'));
 		        } else {
@@ -81,7 +81,7 @@
 
 	$(document).ready(function(){
 		var params = getHashParams()
-		loadPage(params.a, params.b, params.limit);
+		loadPage(params.a, params.b, params.l);
 		sideBarFix();
 		$('.nav a').click(function(){
 			if($(this).next().is('ul')){
@@ -132,7 +132,7 @@
 		})
 		$(window).on('hashchange', function(d) {
 			var params = getHashParams()
-			loadPage(params.a, params.b, params.limit);
+			loadPage(params.a, params.b, params.l);
 		})
 		$('#expand_content_menu, #body_hover').click(function(){
 			"use strict";

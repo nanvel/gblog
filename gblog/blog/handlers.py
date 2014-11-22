@@ -19,7 +19,7 @@ class FeedHandler(RequestHandler):
 class PostHandler(RequestHandler):
 
     def get(self):
-        limit = self.get_argument('limit', 5)
+        limit = self.get_argument('l', 5)
         limit = int(limit)
         a = self.get_argument('a', None)
         b = self.get_argument('b', None)
