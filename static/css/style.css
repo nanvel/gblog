@@ -373,6 +373,17 @@ a:focus, a:active{
 	padding: 0;
 	width: 100%;
 }
+.home_page_post_area .home_single_post .post_content_area .single_post_content div.post_info .place_area{
+	display: block;
+	margin: 14px 0 14px 0;
+	overflow: hidden;
+	padding: 0;
+	width: 100%;
+	color: #b3b3b1;
+	font-size: 16px;
+	line-height: 16px;
+	display:inline-block;
+}
 .home_page_post_area .home_single_post .post_content_area .single_post_content ul+.post_info .tag_area{
 	margin-top:50px
 }
@@ -409,7 +420,6 @@ a:focus, a:active{
 	padding: 0;
 	display:inline-block;
 	text-decoration:none;
-	
 }
 .home_page_post_area .home_single_post .post_content_area .single_post_content div.post_info .date_area a+a{
 	margin-left:10px;

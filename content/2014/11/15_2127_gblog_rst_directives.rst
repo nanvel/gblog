@@ -14,7 +14,6 @@ Code
         if __name__ == '__main__':
             pass
 
-
 Video
 -----
 
@@ -39,7 +38,6 @@ Or Vimeo
     :align: left
     :width: 500
 
-
 Image
 -----
 
@@ -56,7 +54,6 @@ Image
     :alt: Image example
     :align: center
 
-
 BlockQuote
 ----------
 
@@ -67,7 +64,6 @@ BlockQuote
         :author: A Certain Magical Index
         :author_url: https://en.wikipedia.org/wiki/A_Certain_Magical_Index
 
-
 Meta information
 ----------------
 
@@ -76,10 +72,9 @@ Meta information
     .. info::
         :tags: Tag1, Tag2
 
-
 Links:
     - `GBlog on GitHub <https://github.com/nanvel/gblog>`__
 
-
 .. info::
     :tags: RST
+    :place: Kyiv, Ukraine

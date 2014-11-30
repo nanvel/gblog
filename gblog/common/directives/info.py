@@ -21,6 +21,7 @@ class Info(Directive):
     final_argument_whitespace = False
     option_spec = {
         'tags': directives.unchanged,
+        'place': directives.unchanged,
     }
 
     def run(self):
@@ -30,5 +31,8 @@ class Info(Directive):
             for tag in self.options['tags'].split(','):
                 html += '<a href="#">#{tag}</a>'.format(tag=tag.strip())
             html += '</div></div>'
+        if self.options.get('place'):
+            html += '<div class="col-md-12"><div class="place_area">'
+            html += self.options['place'] + '</div></div>'
         html += '</div>'
         return [nodes.raw('', html, format='html')]

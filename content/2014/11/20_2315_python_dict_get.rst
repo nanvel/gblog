@@ -34,3 +34,4 @@ The proper way is:
 
 .. info::
     :tags: Python
+    :place: Kyiv, Ukraine

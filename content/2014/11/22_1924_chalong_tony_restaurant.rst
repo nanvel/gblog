@@ -24,3 +24,4 @@ What to try:
 
 .. info::
     :tags: Places, Phuket
+    :place: Kyiv, Ukraine
