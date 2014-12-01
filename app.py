@@ -17,11 +17,15 @@ class GBlogApplication(web.Application):
         kwargs['debug'] = True
         kwargs['static_path'] = rel('static')
         kwargs['template_path'] = rel('templates')
-        self.redis = redis.StrictRedis(
+        self.redis = self.get_redis_connection()
+        super(GBlogApplication, self).__init__(**kwargs)
+
+    def get_redis_connection(self):
+        """ Override me for testing purposes """
+        return redis.StrictRedis(
             host=options.options.redis_host,
             port=options.options.redis_port,
             db=options.options.redis_db)
-        super(GBlogApplication, self).__init__(**kwargs)
 
 
 if __name__ == '__main__':

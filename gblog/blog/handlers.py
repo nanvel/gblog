@@ -7,6 +7,7 @@ import subprocess
 from tornado.options import options
 from tornado.web import RequestHandler
 
+from ..common.exceptions import GBlogException
 from ..common.utils import rel
 
 
@@ -19,27 +20,40 @@ class FeedHandler(RequestHandler):
 class PostHandler(RequestHandler):
 
     def get(self):
+        # limit
         limit = self.get_argument('l', 5)
         limit = int(limit)
+        # after
         a = self.get_argument('a', None)
+        # before
         b = self.get_argument('b', None)
+        # timestamp, get single post, raise an exception if not exists
+        t = self.get_argument('t', None)
         if limit > options.page_limit_max or limit < 1:
             limit = options.page_limit_max
         timestamp = (arrow.utcnow() + datetime.timedelta(days=1)).timestamp
-        if not a and not b:
+        if not a and not b and not t:
             b = timestamp
         a = int(a) if a else None
         b = int(b) if b else None
-        if b:
+        t = int(t) if t else None
+        if t:
             posts = self.application.redis.zrevrangebyscore(
                 name=options.redis_feed_key,
-                max=b, min=0, start=0, num=limit,
-                withscores=True, score_cast_func=int)
-        else:
+                max=t, min=t, start=0, num=1,
+                withscores=True)
+            if len(posts) != 1:
+                raise GBlogException(message='Not found.', status_code=404)
+        elif b:
             posts = self.application.redis.zrevrangebyscore(
+                name=options.redis_feed_key,
+                max=b - 1, min=0, start=0, num=limit,
+                withscores=True)
+        else:
+            posts = self.application.redis.zrangebyscore(
                 name=options.redis_feed_key,
                 max=timestamp, min=a, start=0, num=limit,
-                withscores=True, score_cast_func=int)
+                withscores=True)
         for p in posts:
             self.write(p[0])
 
