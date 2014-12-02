@@ -1,4 +1,4 @@
 #!/bin/bash
 
-git pull origin master
-.env/bin/python update.py
+cd ../blog && git pull origin master
+cd ../gblog && .env/bin/python update.py

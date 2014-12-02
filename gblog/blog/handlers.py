@@ -55,7 +55,6 @@ class PostHandler(RequestHandler):
                 max=timestamp, min=a, start=0, num=limit,
                 withscores=True)
         for p in sorted(posts, key=lambda k: -1 * k[1]):
-            print p
             self.write(p[0])
 
 

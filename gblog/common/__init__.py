@@ -13,5 +13,7 @@ options.define('redis_feed_key', default='gblog:feed', help='Redis feed key.', t
 options.define('redis_page_key', default='gblog:page', help='Redis page key.', type=str)
 options.define('page_limit_max', default=5, help='Page limit.', type=int)
 options.define('google_maps_key', default='', help='Google embed maps key.', type=str)
+options.define('git_url', default='', help='Github url.', type=str)
+options.define('git_folder', default='', help='Git folder, relative path.', type=str)
 
 register_rst_directives()

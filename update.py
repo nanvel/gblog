@@ -23,7 +23,8 @@ if __name__ == '__main__':
     loader = template.Loader(rel('templates'))
     post_template = loader.load('post.html')
     years = {}
-    for root, dirs, files in os.walk(options.options.content_path):
+    content_path = rel(options.options.git_folder)
+    for root, dirs, files in os.walk(content_path):
         for f in files:
             if f.endswith('.rst'):
                 path = os.path.join(root, f)
@@ -55,7 +56,8 @@ if __name__ == '__main__':
                     date=arrow.get(created).strftime('%B %d, %Y'),
                     date_link='#a={timestamp}'.format(timestamp=created - (created % 86400)),
                     share_link='#b={timestamp}&l=1'.format(timestamp=created),
-                    github_link='https://github.com/nanvel/gblog/tree/master/content/{path}'.format(
+                    github_link='{git_url}/tree/master/content/{path}'.format(
+                        git_url=options.options.git_url,
                         path='/'.join(path.split('/')[-3:])),
                     timestamp=created)
                 r.zadd(REDIS_FEED_TEMP_KEY, created, content)
