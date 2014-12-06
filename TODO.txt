@@ -1,8 +1,11 @@
-- GA tracking code
-- directive for google maps
++ GA tracking code
++ directive for google maps
+- local.cfg.default
+- fix webhook
 - directive for soudcloud
 - sitemap
 - search with elasticsearch
 - tags cloud
 - gist directive
 - favicon
+- angularjs frontend

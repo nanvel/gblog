@@ -5,19 +5,19 @@ import sys
 import subprocess
 
 from tornado.options import options
-from tornado.web import RequestHandler
 
 from ..common.exceptions import GBlogException
 from ..common.utils import rel
+from ..common.handlers import GBlogHandler
 
 
-class FeedHandler(RequestHandler):
+class FeedHandler(GBlogHandler):
 
     def get(self):
         self.write(self.application.redis.get(options.redis_page_key))
 
 
-class PostHandler(RequestHandler):
+class PostHandler(GBlogHandler):
 
     def get(self):
         # limit
@@ -43,7 +43,7 @@ class PostHandler(RequestHandler):
                 max=t, min=t, start=0, num=1,
                 withscores=True)
             if len(posts) != 1:
-                raise GBlogException(message='Not found.', status_code=404)
+                raise GBlogException(reason='Not found.', status_code=404)
         elif b:
             posts = self.application.redis.zrevrangebyscore(
                 name=options.redis_feed_key,
@@ -54,11 +54,13 @@ class PostHandler(RequestHandler):
                 name=options.redis_feed_key,
                 max=timestamp, min=a, start=0, num=limit,
                 withscores=True)
+        response = []
         for p in sorted(posts, key=lambda k: -1 * k[1]):
-            self.write(p[0])
+            response.append({'content': p[0].decode('utf-8')})
+        self.write(json.dumps({'posts': response}))
 
 
-class CommitHandler(RequestHandler):
+class CommitHandler(GBlogHandler):
 
     REDIS_UPDATE_TIMEOUT_KEY = 'gblog:update'
 

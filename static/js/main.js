@@ -25,12 +25,14 @@
 		"use strict";
 		$.ajax({
 		    url: '/post',
-		    dataType: 'html',
+		    dataType: 'json',
 		 	data: {a: a, b: b, l: l},
 		 	type: 'GET',
 		    success: function (data) {
 		    	$('.js-post').remove();
-		        $('.js-posts').prepend(data)
+		    	for (var i=data.posts.length - 1; i >= 0 ; i--) {
+		    		$('.js-posts').prepend(data.posts[i].content);
+		    	}
 		        if (a || b){
 		        	var stateObj = {a: a, b: b, l: l};
 		        	var h = [];
