@@ -56,7 +56,7 @@ if __name__ == '__main__':
                     date=arrow.get(created).strftime('%B %d, %Y'),
                     date_link='#a={timestamp}'.format(timestamp=created - (created % 86400)),
                     share_link='#b={timestamp}&l=1'.format(timestamp=created),
-                    github_link='{git_url}/tree/master/content/{path}'.format(
+                    github_link='{git_url}/tree/master/{path}'.format(
                         git_url=options.options.git_url,
                         path='/'.join(path.split('/')[-3:])),
                     timestamp=created)
