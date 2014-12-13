@@ -39,6 +39,7 @@ class IframeVideo(Directive):
         'height': directives.nonnegative_int,
         'width': directives.nonnegative_int,
         'align': align,
+        'alt': directives.unchanged,
     }
     default_width = 400
 

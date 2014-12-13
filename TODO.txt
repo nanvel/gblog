@@ -9,3 +9,4 @@
 - gist directive
 - favicon
 - angularjs frontend
+- load posts to redis on app restart (if not exists)
