@@ -25,14 +25,10 @@ class Info(Directive):
     }
 
     def run(self):
-        html = u'<div class="row post_info">'
+        html = u'<meat class="post-meta"'
         if self.options.get('tags'):
-            html += '<div class="col-md-12"><div class="tag_area">'
-            for tag in self.options['tags'].split(','):
-                html += '<a href="#">#{tag}</a>'.format(tag=tag.strip())
-            html += '</div></div>'
+            html += ' data-tags="' + self.options['tags'].strip() + '"'
         if self.options.get('place'):
-            html += '<div class="col-md-12"><div class="place_area">'
-            html += self.options['place'] + '</div></div>'
-        html += '</div>'
+            html += ' data-place="' + self.options['place'].strip() + '"'
+        html += '/>'
         return [nodes.raw('', html, format='html')]

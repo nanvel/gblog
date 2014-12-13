@@ -55,9 +55,18 @@ class PostHandler(GBlogHandler):
                 max=timestamp, min=a, start=0, num=limit,
                 withscores=True)
         response = []
+        if not posts:
+            self.write(json.dumps({'posts': []}))
+            return
+        first_t = posts[0][1]
+        last_t = posts[0][1]
         for p in sorted(posts, key=lambda k: -1 * k[1]):
             response.append({'content': p[0].decode('utf-8')})
-        self.write(json.dumps({'posts': response}))
+            if p[1] > first_t:
+                first_t = p[1]
+            if p[1] < last_t:
+                last_t = p[1]
+        self.write(json.dumps({'posts': response, 'first': first_t, 'last': last_t}))
 
 
 class CommitHandler(GBlogHandler):

@@ -5,6 +5,9 @@
         <title>Blog - Oleksandr Polieno</title>
     </head>
     <body data-ng-controller="PageCtrl">
+        <ul class="menu">
+            <li><a href="#/">Feed</a></li>
+        </ul>
         <div data-ng-view="">
         </div>
         <script src="libs/angular/angular.min.js"></script>
@@ -34,13 +37,29 @@
 
             app.controller('FeedCtrl', function($scope, Post) {
                 Post.get(function(data) {
+                    $scope.first = data.first;
+                    $scope.last = data.last;
                     $scope.posts = data.posts;
                 });
+                $scope.showPreviousItems = function() {
+                    Post.get({'b': $scope.last}, function(data) {
+                        $scope.first = data.first;
+                        $scope.last = data.last;
+                        $scope.posts = data.posts;
+                    });
+                }
+                $scope.showNextItems = function() {
+                    Post.get({'a': $scope.first}, function(data) {
+                        $scope.first = data.first;
+                        $scope.last = data.last;
+                        $scope.posts = data.posts;
+                    });
+                }
             });
 
             app.controller('PostCtrl', function($scope, $routeParams, Post) {
-                Post.get({t: 123}, function(data) {
-                    $scope.post = data.post;
+                Post.get({t: $routeParams['timestamp']}, function(data) {
+                    $scope.post = data.posts[0];
                 });
             });
 

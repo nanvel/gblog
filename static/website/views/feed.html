@@ -1,3 +1,5 @@
 <div class="post" data-ng-repeat="post in posts">
     <div data-ng-bind-html="post.content | safe_html"></div>
 </div>
+<button ng-click="showPreviousItems()">Show previous</button>
+<button ng-click="showNextItems()">Show next</button>

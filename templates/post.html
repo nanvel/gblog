@@ -1,20 +1,4 @@
-<div class="home_single_post js-post" data-timestamp="{{ timestamp }}">
-    <div class="post_content_area">
-        <div class="row">
-            <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 col-xs-offset-0 col-sm-offset-2 col-md-offset-2 col-lg-offset-2">
-                <div class="single_post_content">
-                    {% raw post_content %}
-                    <div class="row post_info">
-                        <div class="col-md-8">
-                            <div class="date_area">
-                                <a href="{{ date_link }}">{{ date }}</a>
-                                <a href="{{ share_link }}">Share</a>
-                                <a href="{{ github_link }}">Edit on GitHub</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+{% raw post_content %}
+<meta class="pub-date" data-pub-date="{{ date }}"/>
+<a class="share-link" href="{{ share_link }}">Share</a>
+<a class="edit-link" href="{{ github_link }}">Edit on GitHub</a>
