@@ -2,5 +2,7 @@
 {% block title %}{{ header }}{% end %}
 {% block body %}
 {% raw content %}
-{{ date }} <a href="{{ github_link }}" target="_blank">Edit on GitHub</a>
+<div class="page-actions">
+    {{ date }} <a href="{{ github_link }}" target="_blank">Edit on GitHub</a>
+</div>
 {% end %}

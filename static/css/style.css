@@ -393,3 +393,6 @@ div.index ul li {
     line-height: 1.4em;
     padding: 5px;
 }
+div.page-actions {
+    margin: 40px 0;
+}
