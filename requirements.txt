@@ -4,3 +4,4 @@ arrow
 docutils
 pygments
 fakeredis
+beautifulsoup4

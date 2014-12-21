@@ -14,50 +14,14 @@ from ..common.handlers import GBlogHandler
 class FeedHandler(GBlogHandler):
 
     def get(self):
-        self.write(self.application.redis.get(options.redis_page_key))
+        self.write(self.application.redis.get(options.redis_home_key))
 
 
 class PostHandler(GBlogHandler):
 
-    def get(self):
-        # limit
-        limit = self.get_argument('l', 5)
-        limit = int(limit)
-        # after
-        a = self.get_argument('a', None)
-        # before
-        b = self.get_argument('b', None)
-        # timestamp, get single post, raise an exception if not exists
-        t = self.get_argument('t', None)
-        if limit > options.page_limit_max or limit < 1:
-            limit = options.page_limit_max
-        timestamp = (arrow.utcnow() + datetime.timedelta(days=1)).timestamp
-        if not a and not b and not t:
-            b = timestamp
-        a = int(a) if a else None
-        b = int(b) if b else None
-        t = int(t) if t else None
-        if t:
-            posts = self.application.redis.zrevrangebyscore(
-                name=options.redis_feed_key,
-                max=t, min=t, start=0, num=1,
-                withscores=True)
-            if len(posts) != 1:
-                raise GBlogException(reason='Not found.', status_code=404)
-        elif b:
-            posts = self.application.redis.zrevrangebyscore(
-                name=options.redis_feed_key,
-                max=b - 1, min=0, start=0, num=limit,
-                withscores=True)
-        else:
-            posts = self.application.redis.zrangebyscore(
-                name=options.redis_feed_key,
-                max=timestamp, min=a, start=0, num=limit,
-                withscores=True)
-        response = []
-        for p in sorted(posts, key=lambda k: -1 * k[1]):
-            response.append({'content': p[0].decode('utf-8')})
-        self.write(json.dumps({'posts': response}))
+    def get(self, timestamp):
+        post_key = options.redis_page_key.format(timestamp=timestamp)
+        self.write(self.application.redis.get(post_key))
 
 
 class CommitHandler(GBlogHandler):

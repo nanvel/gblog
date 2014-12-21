@@ -1,0 +1,9 @@
+{% extends base.html %}
+{% block title %}Blog{% end %}
+{% block body %}
+<ul>
+{% for page in pages %}
+    <li><a href="{{ reverse_url('post', page[0]) }}">{{ page[1] }}</a></li>
+{% end %}
+</ul>
+{% end %}

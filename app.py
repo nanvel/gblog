@@ -10,9 +10,9 @@ class GBlogApplication(web.Application):
 
     def __init__(self, **kwargs):
         kwargs['handlers'] = [
-            web.url(r'/', FeedHandler, name='feed'),
-            web.url(r'/post', PostHandler, name='post'),
-            web.url(r'/commit', CommitHandler, name='commin'),
+            web.url(r'/', FeedHandler, name='home'),
+            web.url(r'/post/(?P<timestamp>\d{10,11})', PostHandler, name='post'),
+            web.url(r'/commit', CommitHandler, name='commit'),
         ]
         kwargs['debug'] = True
         kwargs['static_path'] = rel('static')
