@@ -208,8 +208,6 @@ pre.address {
     font: inherit
 }
 pre.literal-block, pre.doctest-block, pre.math, pre.code {
-    margin-left: 2em;
-    margin-right: 2em;
     padding: 10px;
     font-size: 1.1em;
 }
