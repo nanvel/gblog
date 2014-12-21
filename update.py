@@ -45,9 +45,14 @@ if __name__ == '__main__':
                         'doctitle_xform': False},
                     config_section=None, enable_exit_status=False)
                 content = output.strip()
+                soup = BeautifulSoup(output)
+                header = soup.find('h1')
+                if not header:
+                    continue
                 if created:
                     content = blog_page_template.generate(
                         content=content,
+                        header=header.text,
                         date=arrow.get(created).strftime('%B %d, %Y'),
                         share_link=app.reverse_url('blog_page', created),
                         github_link='{git_url}/tree/master/{path}'.format(
@@ -58,6 +63,7 @@ if __name__ == '__main__':
                 else:
                     content = simple_page_template.generate(
                         content=content,
+                        header=header.text,
                         share_link=app.reverse_url('simple_page', created),
                         github_link='{git_url}/tree/master/{path}'.format(
                             git_url=options.options.git_url,
@@ -67,16 +73,13 @@ if __name__ == '__main__':
                     page_key = options.options.redis_simple_page_key.format(slug=slug)
                 r.set(page_key, content)
                 # get header
-                soup = BeautifulSoup(output)
-                header = soup.find('h1')
-                if header:
-                    if created:
-                        blog_pages.append((
-                            created,
-                            arrow.get(created).strftime('%d'),
-                            header.text))
-                    else:
-                        simple_pages.append((slug, header.text))
+                if created:
+                    blog_pages.append((
+                        created,
+                        arrow.get(created).strftime('%d'),
+                        header.text))
+                else:
+                    simple_pages.append((slug, header.text))
     # prepare index page
     page_template = loader.load('home.html')
     # prepare blog pages (split by dates)
