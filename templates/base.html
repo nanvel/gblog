@@ -6,14 +6,34 @@
         <link type="text/css" href="/static/css/style.css?v=1" rel="stylesheet"/>
     </head>
     <body>
+        <nav>
+            <div class="social">
+                <a href="https://www.facebook.com/polyenoom" target="_blank">Facebook</a>
+                <a href="https://plus.google.com/u/0/+OleksandrPolyeno" target="_blank">G+</a>
+                <a href="https://github.com/nanvel" target="_blank">GitHub</a>
+                <a href="http://ua.linkedin.com/pub/oleksandr-polyeno/54/359/239" target="_blank">LinkedIn</a>
+            </div>
+            <div class="navigation">
+                <a href="/">Home</a>
+            </div>
+        </nav>
+        <div class="content">
         {% block body %}{% end %}
+        </div>
+        <footer>
+            <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/" target="_blank" class="creative-commons">
+                <img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/3.0/88x31.png" />
+            </a>
+        </footer>
+        {% if google_analytics_key %}
         <script>
             (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
             (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
             m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
             })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-            ga('create', 'UA-57010164-1', 'auto');
+            ga('create', '{google_analytics_key}', 'auto');
             ga('send', 'pageview');
         </script>
+        {% end %}
     </body>
 </html>

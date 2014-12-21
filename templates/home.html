@@ -1,9 +1,21 @@
 {% extends base.html %}
 {% block title %}Blog{% end %}
 {% block body %}
-<ul>
-{% for page in pages %}
-    <li><a href="{{ reverse_url('post', page[0]) }}">{{ page[1] }}</a></li>
-{% end %}
-</ul>
+<div class="index">
+    <h1>Blog</h1>
+    {% for month in blog_pages %}
+        <h2>{{ month[0] }}</h2>
+        <ul>
+            {% for page in month[1] %}
+            <li>{{ page[1] }} <a href="{{ reverse_url('blog_page', page[0]) }}">{{ page[2] }}</a></li>
+            {% end %}
+        </ul>
+    {% end %}
+    <h1>Pages</h1>
+    <ul>
+    {% for page in simple_pages %}
+        <li><a href="{{ reverse_url('simple_page', page[0]) }}">{{ page[1] }}</a></li>
+    {% end %}
+    </ul>
+</div>
 {% end %}

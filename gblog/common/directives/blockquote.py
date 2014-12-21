@@ -25,12 +25,12 @@ class BlockQuote(Directive):
     }
 
     def run(self):
-        html = u'<div class="sinle_blockquote">'
-        html += '<h2><sup>&ldquo;</sup>{content}<sup>&rdquo;</sup></h2>'.format(
+        html = u'<div class="blockquote">'
+        html += '<sup>&ldquo;</sup>{content}<sup>&rdquo;</sup><br>'.format(
             content=self.options['content'])
         if self.options.get('author_url'):
-            html += '<a href="{author_url}" target="_blank">{author_name}</a></div>'.format(
+            html += '<small><a href="{author_url}" target="_blank">{author_name}</a></small></div>'.format(
                 author_url=self.options['author_url'], author_name=self.options['author'])
         else:
-            html += '{author_name}</div>'.format(author_name=self.options['author'])
+            html += '<small>{author_name}</small></div>'.format(author_name=self.options['author'])
         return [nodes.raw('', html, format='html')]

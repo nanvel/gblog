@@ -1,3 +1,4 @@
+/* rst */
 .borderless, table.borderless td, table.borderless th {
     border: 0
 }
@@ -111,7 +112,7 @@ div.topic {
 }
 h1.section-subtitle, h2.section-subtitle, h3.section-subtitle,
 h4.section-subtitle, h5.section-subtitle, h6.section-subtitle {
-    margin-top: 0.4em
+    margin-top: 0.4em;
 }
 h1.title {
     text-align: center
@@ -123,9 +124,7 @@ hr.docutils {
     width: 75%
 }
 img.align-left, .figure.align-left, object.align-left {
-    clear: left;
-    float: left;
-    margin-right: 1em
+    display: block;
 }
 img.align-right, .figure.align-right, object.align-right {
     clear: right;
@@ -200,6 +199,9 @@ p.sidebar-subtitle {
 p.topic-title {
     font-weight: bold
 }
+pre {
+    word-wrap: break-word;
+}
 pre.address {
     margin-bottom: 0;
     margin-top: 0;
@@ -207,7 +209,9 @@ pre.address {
 }
 pre.literal-block, pre.doctest-block, pre.math, pre.code {
     margin-left: 2em;
-    margin-right: 2em
+    margin-right: 2em;
+    padding: 10px;
+    font-size: 1.1em;
 }
 pre.code .ln {
     color: grey;
@@ -303,4 +307,90 @@ h4 tt.docutils, h5 tt.docutils, h6 tt.docutils {
 }
 ul.auto-toc {
     list-style-type: none
+}
+/* gblog */
+body {
+    font-family: Tahoma, Geneva, sans-serif;
+    line-height: 1.2em;
+    color: black;
+}
+body a {
+    text-decoration: none;
+}
+body a:hover {
+    text-decoration: underline;
+}
+nav {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: black;
+    width: 100%;
+    color: white;
+}
+nav > div {
+    display: inline-block;
+    padding: 0 10px;
+}
+nav > div > a {
+    color: white;
+    text-decoration: none;
+    display: inline-block;
+    padding: 10px;
+}
+nav > div.navigation {
+    position: absolute;
+    right: 0;
+}
+div.content {
+    padding: 0 10px;
+    max-width: 800px;
+    margin: 100px auto 50px auto;
+}
+div.content a {
+    color: #3ac492;
+}
+footer {
+    padding: 10px;
+}
+iframe {
+    display: block;
+}
+div.info-block {
+    margin: 40px 0;
+}
+div.info-block > div {
+    line-height: 1.2em;
+}
+.blockquote {
+    font-size: 2em;
+    text-align: right;
+    line-height: 150%;
+}
+.blockquote > small {
+    font-size: 0.5em;
+}
+h1, h2 {
+    line-height: 2em;
+}
+dd {
+    margin-top: 10px;
+    margin-left: 0;
+}
+ul li, ol li {
+    line-height: 1.4em;
+}
+div.index {
+    font-size: 1.2em;
+}
+div.index a {
+    color: black;
+}
+div .index ul {
+    list-style-type: none;
+}
+div.index ul li {
+    line-height: 1.4em;
+    padding: 5px;
 }

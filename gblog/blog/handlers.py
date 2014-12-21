@@ -1,6 +1,3 @@
-import arrow
-import datetime
-import json
 import sys
 import subprocess
 
@@ -14,14 +11,28 @@ from ..common.handlers import GBlogHandler
 class FeedHandler(GBlogHandler):
 
     def get(self):
-        self.write(self.application.redis.get(options.redis_home_key))
+        self.write(
+            self.application.redis.get(options.redis_home_key).decode('utf-8'))
 
 
-class PostHandler(GBlogHandler):
+class BlogPageHandler(GBlogHandler):
 
     def get(self, timestamp):
-        post_key = options.redis_page_key.format(timestamp=timestamp)
-        self.write(self.application.redis.get(post_key))
+        page_key = options.redis_blog_page_key.format(timestamp=timestamp)
+        page = self.application.redis.get(page_key)
+        if page is None:
+            raise GBlogException(reason='Page was not found!', status_code=404)
+        self.write(page.decode('utf-8'))
+
+
+class SimplePageHandler(GBlogHandler):
+
+    def get(self, slug):
+        page_key = options.redis_simple_page_key.format(slug=slug)
+        page = self.application.redis.get(page_key)
+        if page is None:
+            raise GBlogException(reason='Page was not found!', status_code=404)
+        self.write(page.decode('utf-8'))
 
 
 class CommitHandler(GBlogHandler):
