@@ -1,11 +1,10 @@
 import redis
 
 from tornado import web, options, ioloop
-
 from gblog.blog.handlers import (
     FeedHandler, BlogPageHandler, SimplePageHandler,
     CommitHandler)
-from gblog.common.utils import rel
+from gblog.common.utils import rel, load_cfg
 
 
 class GBlogApplication(web.Application):
@@ -32,8 +31,7 @@ class GBlogApplication(web.Application):
 
 
 if __name__ == '__main__':
-    options.parse_command_line()
-    options.parse_config_file(rel('gblog.cfg'))
+    load_cfg()
     application = GBlogApplication()
     application.listen(options.options.port)
     ioloop.IOLoop.instance().start()

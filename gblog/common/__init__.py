@@ -20,5 +20,6 @@ options.define('google_maps_key', default='', help='Google embed maps key.', typ
 options.define('google_analytics_key', default='', help='Google analytics key.', type=str)
 options.define('git_url', default='', help='Github url.', type=str)
 options.define('git_folder', default='', help='Git folder, relative path.', type=str)
+options.define('disqus_shortname', default='', help='Disqus short name.', type=str)
 
 register_rst_directives()

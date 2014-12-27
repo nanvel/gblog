@@ -1,6 +1,7 @@
 import arrow
-
 import os.path
+
+from tornado import options
 
 
 rel = lambda p: os.path.join(
@@ -23,3 +24,10 @@ def path_to_timestamp(path):
 def path_to_slug(path):
     slug = path.split('/')[-1]
     return slug.split('.rst')[0]
+
+
+def load_cfg():
+    options.parse_command_line()
+    options.parse_config_file(rel('gblog.cfg'))
+    if os.path.exists(rel('local.cfg')):
+        options.parse_config_file(rel('local.cfg'))

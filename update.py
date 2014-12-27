@@ -6,22 +6,22 @@ from app import GBlogApplication
 from bs4 import BeautifulSoup
 from docutils import io
 from docutils.core import publish_programmatically
-from gblog.common.utils import rel, path_to_timestamp, path_to_slug
+from gblog.common.utils import rel, path_to_timestamp, path_to_slug, load_cfg
 from gblog.common.directives import register_rst_directives
-from tornado import options, template
+from tornado import template
+from tornado.options import options
 
 
 if __name__ == '__main__':
-    options.parse_command_line()
-    options.parse_config_file(rel('gblog.cfg'))
+    load_cfg()
     r = redis.StrictRedis(
-        host=options.options.redis_host,
-        port=options.options.redis_port,
-        db=options.options.redis_db)
+        host=options.redis_host,
+        port=options.redis_port,
+        db=options.redis_db)
     loader = template.Loader(rel('templates'))
     blog_page_template = loader.load('blog_page.html')
     simple_page_template = loader.load('simple_page.html')
-    content_path = rel(options.options.git_folder)
+    content_path = rel(options.git_folder)
     app = GBlogApplication()
     blog_pages = []
     simple_pages = []
@@ -56,21 +56,23 @@ if __name__ == '__main__':
                         date=arrow.get(created).strftime('%B %d, %Y'),
                         share_link=app.reverse_url('blog_page', created),
                         github_link='{git_url}/tree/master/{path}'.format(
-                            git_url=options.options.git_url,
+                            git_url=options.git_url,
                             path='/'.join(path.split('/')[-3:])),
-                        google_analytics_key=options.options.google_analytics_key)
-                    page_key = options.options.redis_blog_page_key.format(timestamp=created)
+                        google_analytics_key=options.google_analytics_key,
+                        disqus_shortname=options.disqus_shortname)
+                    page_key = options.redis_blog_page_key.format(timestamp=created)
                 else:
                     content = simple_page_template.generate(
                         content=content,
                         header=header.text,
                         share_link=app.reverse_url('simple_page', created),
                         github_link='{git_url}/tree/master/{path}'.format(
-                            git_url=options.options.git_url,
+                            git_url=options.git_url,
                             path='/'.join(path.split('/')[-3:])),
-                        google_analytics_key=options.options.google_analytics_key)
+                        google_analytics_key=options.google_analytics_key,
+                        disqus_shortname=options.disqus_shortname)
                     slug = path_to_slug(path)
-                    page_key = options.options.redis_simple_page_key.format(slug=slug)
+                    page_key = options.redis_simple_page_key.format(slug=slug)
                 r.set(page_key, content)
                 # get header
                 if created:
@@ -101,5 +103,5 @@ if __name__ == '__main__':
         blog_pages=blog_pages_by_month,
         simple_pages=simple_pages,
         reverse_url=app.reverse_url,
-        google_analytics_key=options.options.google_analytics_key)
-    r.set(options.options.redis_home_key, content)
+        google_analytics_key=options.google_analytics_key)
+    r.set(options.redis_home_key, content)
