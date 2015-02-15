@@ -1,4 +1,3 @@
-import sys
 import subprocess
 
 from tornado.options import options
@@ -44,5 +43,5 @@ class CommitHandler(GBlogHandler):
             self.write('Success')
             return
         self.application.redis.setex(self.REDIS_UPDATE_TIMEOUT_KEY, 30, 1)
-        proc = subprocess.Popen([sys.executable, rel('pullchanges.sh')])
+        proc = subprocess.Popen(['bash', rel('pullchanges.sh')])
         proc.communicate()
