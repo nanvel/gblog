@@ -352,6 +352,9 @@ div.content a {
 footer {
     padding: 10px;
 }
+footer a {
+    color: #000;
+}
 iframe {
     display: block;
 }

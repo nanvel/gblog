@@ -22,7 +22,7 @@ def path_to_timestamp(path):
 
 
 def path_to_slug(path):
-    slug = path.split('/')[-1]
+    slug = path.split('/')[-1].replace('_', '-')
     return slug.split('.rst')[0]
 
 
