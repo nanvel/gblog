@@ -1,5 +1,7 @@
+- sitemap
 - update design to two columns: http://chase-seibert.github.io/blog/2013/08/03/diagnosing-memory-leaks-python.html
 - directive for soudcloud
 - search with elasticsearch
 - gist directive
 - load posts to redis on app restart (if not exists)
+- tags
