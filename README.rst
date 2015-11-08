@@ -1,7 +1,9 @@
 GBlog - simple, fast, extendable blogging engine
 ================================================
 
-For geeks like `me <http://nanvel.com>`__.
+Deprecated. See `c2p2 <https://github.com/nanvel/c2p2>`__ instead.
+
+For geeks like `me <http://nanvel.name>`__.
 
 Features:
     - wrote in Python using tornado
